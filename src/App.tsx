@@ -6,8 +6,8 @@ import viteLogo from "/vite.svg";
 import { useAuth0 } from "@auth0/auth0-react";
 
 // Global Components
-import { LoginButton } from "./auth/signin";
-import { Logout } from "./auth/logout";
+import { Login } from "./auth/Login";
+import { Logout } from "./auth/Logout";
 import { Profile } from "./auth/Profile";
 
 function App() {
@@ -25,7 +25,7 @@ function App() {
 
   return (
     <>
-      <div className="bg-blue-300">
+      <div className="bg-blue-900">
         <a href="https://vitejs.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
         </a>
@@ -48,7 +48,7 @@ function App() {
 
       {isAuthenticated && <Profile />}
 
-      {isAuthenticated ? <Logout /> : <LoginButton />}
+      {isAuthenticated ? <Logout /> : <Login />}
     </>
   );
 }
