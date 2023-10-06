@@ -7,16 +7,19 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 // Global Components
 import { LoginButton } from "./auth/signin";
+import { Logout } from "./auth/logout";
+import { Profile } from "./auth/Profile";
 
 function App() {
   const [count, setCount] = useState(0);
 
   // Authentication
-  const { isLoading, error, isAuthenticated } = useAuth0();
+  const { isLoading, error, isAuthenticated, user } = useAuth0();
 
   if (isLoading) return <div>Loading...</div>;
   if (error) {
     console.log(error);
+    console.log(user);
     return <div>Oops... {error.message}</div>;
   }
 
@@ -43,15 +46,9 @@ function App() {
         Click on the Vite and React logos to learn more
       </p>
 
-      <p className="text-yellow-300">Testing</p>
+      {isAuthenticated && <Profile />}
 
-      {isAuthenticated && (
-        <div>
-          <p>You are logged in!</p>
-        </div>
-      )}
-
-      <LoginButton />
+      {isAuthenticated ? <Logout /> : <LoginButton />}
     </>
   );
 }
