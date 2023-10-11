@@ -2,9 +2,9 @@ import React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 
 // Local Components
-import { LogoutButton } from "../../../auth/LogoutButton";
-import { LoginButton } from "../../../auth/LoginButton";
-import { SignupButton } from "../../../auth/SignupButton";
+import { LogoutButton } from "@/auth/LogoutButton";
+import { LoginButton } from "@/auth/LoginButton";
+import { SignupButton } from "@/auth/SignupButton";
 
 export const Navbar = () => {
   const { isAuthenticated } = useAuth0();

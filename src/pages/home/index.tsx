@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
-// import { Logout } from "./auth/Logout";
-// import { Profile } from "./auth/Profile";
+
+// Global Components
+// import { Logout } from "@/auth/Logout";
+// import { Profile } from "@/auth/Profile";
 
 // Features
-import { Layout } from "../../features/layout";
+import { Layout } from "@/features/layout";
 
 const Home = () => {
   const { isAuthenticated, user } = useAuth0();
