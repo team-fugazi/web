@@ -1,19 +1,19 @@
 import React from "react";
 
 // Local Components
-import { Navbar } from "./components/navbar";
+import { Navbar } from "./components/Navbar";
 
 // types
 interface Props {
-  children: React.ReactNode | React.ReactNode[];
+	children: React.ReactNode | React.ReactNode[];
 }
 
 export const Layout = ({ children }: Props) => {
-  return (
-    <div>
-      <Navbar />
+	return (
+		<div>
+			<Navbar />
 
-      <section className="flex-1">{children}</section>
-    </div>
-  );
+			<section className="flex-1">{children}</section>
+		</div>
+	);
 };
