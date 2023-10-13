@@ -13,7 +13,7 @@ export const Layout = ({ children }: Props) => {
 		<div>
 			<Navbar />
 
-			<section className="flex-1">{children}</section>
+			<section className="flex-1 container mx-auto px-4">{children}</section>
 		</div>
 	);
 };
