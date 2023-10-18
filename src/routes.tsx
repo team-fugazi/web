@@ -1,26 +1,29 @@
-import { createBrowserRouter} from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
+
+// Route Protection
+import { ProtectedRoute } from "./features/auth/ProtectedRoute";
 
 // Pages
 import Home from "./pages/home";
-import Start from "./pages/start";
 import Reports from "./pages/reports";
+import AuthPage from "./pages/auth";
 
 const Router = createBrowserRouter([
   {
-    path: "/",
-    element: <Home/>,
+    path: "/auth",
+    element: <AuthPage />,
   },
   {
-    path: "/auth",
-    element: <Start/>,
+    path: "/",
+    element: <ProtectedRoute component={Home} />,
   },
   {
     path: "/reports",
-    element: <Reports/>,
+    element: <ProtectedRoute component={Reports} />,
   },
   {
     path: "/reports/:id",
-    element: <Reports/>,
+    element: <ProtectedRoute component={Reports} />,
   },
   {
     path: "*", // Catch-all route for 404

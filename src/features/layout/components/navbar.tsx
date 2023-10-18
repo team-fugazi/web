@@ -1,9 +1,9 @@
 import { useAuth0 } from "@auth0/auth0-react";
 
 // Local Components
-import { LogoutButton } from "../../../auth/LogoutButton";
-import { LoginButton } from "../../../auth/LoginButton";
-import { SignupButton } from "../../../auth/SignupButton";
+import { LogoutButton } from "@/auth/LogoutButton";
+import { LoginButton } from "@/auth/LoginButton";
+import { SignupButton } from "@/auth/SignupButton";
 
 // Feature components
 import { NavItem } from "./NavItem";
