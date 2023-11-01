@@ -1,6 +1,11 @@
 // Auth0
-import { Auth0Provider } from "@auth0/auth0-react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import {
+  AppState,
+  Auth0Provider,
+  User,
+  withAuthenticationRequired,
+} from "@auth0/auth0-react";
+import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 
 // Environment variables
 const domain = import.meta.env.VITE_AUTH0_DOMAIN;
@@ -16,26 +21,36 @@ import { ProtectedRoute } from "./features/auth/ProtectedRoute";
 import AuthLayoutComponent from "./features/layout/AuthLayout";
 
 function App() {
+  const navigate = useNavigate();
+
+  const onRedirectCallback = (appState: AppState | undefined) => {
+    console.log(appState);
+    console.log("hello");
+    navigate(appState?.returnTo || window.location.pathname);
+  };
+
   return (
-    <BrowserRouter>
-      <Auth0Provider
-        domain={domain}
-        clientId={clientId}
-        authorizationParams={{
-          redirect_uri: window.location.origin,
-        }}
-      >
-        <Routes>
-          <Route path="/" element={<ProtectedRoute component={Home} />} />
-          <Route path="/auth" element={<AuthPage />} />
-          <Route
-            path="/reports"
-            element={<ProtectedRoute component={Reports} />}
-          />
-          <Route path="/test" element={<AuthLayoutComponent />} />
-        </Routes>
-      </Auth0Provider>
-    </BrowserRouter>
+    <Auth0Provider
+      domain={domain}
+      clientId={clientId}
+      cacheLocation={"localstorage"}
+      useRefreshTokens={true}
+      onRedirectCallback={onRedirectCallback}
+      authorizationParams={{
+        redirect_uri: "http://localhost:5173/",
+        audience: "https://dev-r2bppovsrgoxsk4m.us.auth0.com/api/v2/",
+      }}
+    >
+      <Routes>
+        <Route path="/" element={<ProtectedRoute component={Home} />} />
+        <Route path="/auth" element={<AuthPage />} />
+        <Route
+          path="/reports"
+          element={<ProtectedRoute component={Reports} />}
+        />
+        <Route path="/test" element={<AuthLayoutComponent />} />
+      </Routes>
+    </Auth0Provider>
   );
 }
 

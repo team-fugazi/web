@@ -4,6 +4,9 @@ export const ProtectedRoute: React.FC<{ component: React.ComponentType }> = ({
   component,
   ...args
 }) => {
-  const Component = withAuthenticationRequired(component, args);
-  return <Component />;
+  const Cp = withAuthenticationRequired(component, {
+    returnTo: "/",
+    onRedirecting: () => <div>Redirecting you to the login...</div>,
+  });
+  return <Cp {...args} />;
 };
