@@ -1,11 +1,6 @@
 // Auth0
-import {
-  AppState,
-  Auth0Provider,
-  User,
-  withAuthenticationRequired,
-} from "@auth0/auth0-react";
-import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
+import { AppState, Auth0Provider } from "@auth0/auth0-react";
+import { Routes, Route, useNavigate } from "react-router-dom";
 
 // Environment variables
 const domain = import.meta.env.VITE_AUTH0_DOMAIN;
@@ -19,6 +14,8 @@ import AuthPage from "@/pages/auth";
 // Features
 import { ProtectedRoute } from "./features/auth/ProtectedRoute";
 import AuthLayoutComponent from "./features/layout/AuthLayout";
+import Community from "./pages/community";
+import ReportDetail from "./pages/report-detail";
 
 function App() {
   const navigate = useNavigate();
@@ -48,7 +45,15 @@ function App() {
           path="/reports"
           element={<ProtectedRoute component={Reports} />}
         />
-        <Route path="/test" element={<AuthLayoutComponent />} />
+        <Route
+          path="/reports/:reportId"
+          element={<ProtectedRoute component={ReportDetail} />}
+        />
+        <Route
+          path="/community"
+          element={<ProtectedRoute component={Community} />}
+        />
+        <Route path="/prep" element={<AuthLayoutComponent />} />
       </Routes>
     </Auth0Provider>
   );

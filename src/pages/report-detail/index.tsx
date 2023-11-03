@@ -1,6 +1,6 @@
 // import React from "react";
 import useSWR from "swr";
-
+import { useParams } from "react-router-dom";
 
 // feature components
 import { Layout } from "@/features/layout";
@@ -12,10 +12,12 @@ import { SeverityFilter } from "@/features/report/components/SeverityFilter";
 // types
 import { Category } from "@/features/report/interfaces/Category";
 
+const fetcher = (url: string) =>
+  fetch("http://127.0.0.1:8000" + url).then((res) => res.json());
 
-const fetcher = (url: string) => fetch("http://127.0.0.1:8000" + url).then((res) => res.json());
+const ReportDetail = () => {
+  const { reportId } = useParams();
 
-const Reports = () => {
   const { data, error } = useSWR("/v1/categories", fetcher);
 
   if (error) return <div>failed to load</div>;
@@ -25,7 +27,7 @@ const Reports = () => {
     <Layout>
       {/* Page header */}
       <div className="py-8">
-        <h1 className="text-2xl font-semibold text-gray-900">Reports</h1>
+        <h1 className="text-2xl font-semibold text-gray-900">Report: {reportId}</h1>
       </div>
 
       {/* Page content */}
@@ -46,4 +48,4 @@ const Reports = () => {
   );
 };
 
-export default Reports;
+export default ReportDetail;

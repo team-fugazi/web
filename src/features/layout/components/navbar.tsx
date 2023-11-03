@@ -36,14 +36,10 @@ export const Navbar = () => {
             className="hidden md:flex justify-between w-full"
           >
             {/** navigation links */}
-            <ul className="flex items-center gap-6 text-sm">
+            <ul className="flex items-center gap-2 text-sm">
               <NavItem href="/">Home</NavItem>
-
               <NavItem href="/reports">Reports</NavItem>
-
-              <NavItem href="/community" isDisabled>
-                Community
-              </NavItem>
+              <NavItem href="/community">Community</NavItem>
             </ul>
 
             {/** Auth links */}

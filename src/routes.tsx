@@ -1,12 +1,15 @@
+// WARN: This file is not in use. It is a test file for react-router-dom v6
 import { createBrowserRouter } from "react-router-dom";
 
 // Route Protection
-import { ProtectedRoute } from "./features/auth/ProtectedRoute";
+// import { ProtectedRoute } from "./features/auth/ProtectedRoute";
 
 // Pages
 import Home from "./pages/home";
 import Reports from "./pages/reports";
+import ReportDetail from "./pages/report-detail";
 import AuthPage from "./pages/auth";
+import Community from "./pages/community";
 
 const Router = createBrowserRouter([
   {
@@ -14,21 +17,21 @@ const Router = createBrowserRouter([
     element: <AuthPage />,
   },
   {
-    path: "/",
-    element: <ProtectedRoute component={Home} />,
-  },
-  {
     path: "/reports",
-    element: <ProtectedRoute component={Reports} />,
+    element: <Reports />,
   },
   {
-    path: "/reports/:id",
-    element: <ProtectedRoute component={Reports} />,
+    path: "/prep",
+    element: <ReportDetail />,
   },
   {
-    path: "*", // Catch-all route for 404
-    element: <>404</>,
+    path: "/community",
+    element: <Community />,
   },
+  {
+    path: "/",
+    element: <Home />,
+  }
 ]);
 
 export default Router;

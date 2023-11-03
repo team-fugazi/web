@@ -12,7 +12,7 @@ interface Props {
 
 export const Layout = ({ children }: Props) => {
 	return (
-		<div className="dark:bg-blue-300 h-screen">
+		<div className="h-screen">
 			<Navbar />
 
 			<section className="flex-1 container mx-auto px-4">{children}</section>
