@@ -45,8 +45,8 @@ export const ReportListItem = ({ category }: { category: Category }) => {
 
         <div className="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
           <dt className="font-medium text-gray-900">See more</dt>
-          <dd className="text-gray-700 sm:col-span-2 ">
-            <Link to={`/reports/${category.category_id}`}>See more</Link>
+          <dd className="text-blue-500 sm:col-span-2 ">
+            <Link to={`/reports/${category.id}`}>See more</Link>
           </dd>
         </div>
       </dl>

@@ -13,10 +13,14 @@ import { SeverityFilter } from "@/features/report/components/SeverityFilter";
 import { Category } from "@/features/report/interfaces/Category";
 
 
-const fetcher = (url: string) => fetch("http://127.0.0.1:8000" + url).then((res) => res.json());
+const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 const Reports = () => {
-  const { data, error } = useSWR("/v1/categories", fetcher);
+
+  const url = new URL("http://127.0.0.1:8000/v1/categories");
+  const { data, error } = useSWR(url.toString(), fetcher);
+
+  console.log(data);
 
   if (error) return <div>failed to load</div>;
   if (!data) return <div>loading...</div>;
@@ -30,16 +34,16 @@ const Reports = () => {
 
       {/* Page content */}
       <main className="grid grid-cols-4 gap-4">
-        <section className="col-span-1 space-y-2 shrink-0 min-w-fit">
-          <SearchFilter />
-          <SeverityFilter />
-          <DateFilter />
-        </section>
-
         <section className="flex flex-col space-y-4 col-span-3">
           {data.map((cat: Category, i: React.Key) => (
             <ReportListItem category={cat} key={i} />
           ))}
+        </section>
+
+        <section className="col-span-1 space-y-2 shrink-0 min-w-fit">
+          <SearchFilter />
+          <SeverityFilter />
+          <DateFilter />
         </section>
       </main>
     </Layout>
