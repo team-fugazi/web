@@ -22,7 +22,6 @@ function App() {
 
   const onRedirectCallback = (appState: AppState | undefined) => {
     console.log(appState);
-    console.log("hello");
     navigate(appState?.returnTo || window.location.pathname);
   };
 
