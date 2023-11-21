@@ -1,6 +1,8 @@
 // Auth0
 import { AppState, Auth0Provider } from "@auth0/auth0-react";
 import { Routes, Route, useNavigate } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 // Environment variables
 const domain = import.meta.env.VITE_AUTH0_DOMAIN;
@@ -54,6 +56,20 @@ function App() {
         />
         <Route path="/prep" element={<AuthLayoutComponent />} />
       </Routes>
+
+      {/** React Toast Container */}
+      <ToastContainer
+        position="bottom-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </Auth0Provider>
   );
 }

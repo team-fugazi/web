@@ -11,7 +11,7 @@ export const Comment: React.FC<CommentTypeUser> = (comment) => {
         </div>
 
         <div>
-          <p className="text-sm text-gray-700">
+          <p className="text-sm font-light subpixel-antialiased text-gray-700">
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsam
             nulla amet voluptatum sit rerum, atque, quo culpa ut necessitatibus
             eius suscipit eum accusamus, aperiam voluptas exercitationem facere
