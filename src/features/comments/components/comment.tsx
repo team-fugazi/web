@@ -1,24 +1,13 @@
 import React from "react";
 
-import { CommentType } from "../interfaces/CommentType";
+import { CommentTypeUser } from "../interfaces/CommentType";
 
-export const Comment: React.FC<CommentType> = (comment) => {
+export const Comment: React.FC<CommentTypeUser> = (comment) => {
   return (
     <article className="rounded border border-gray-200 p-3">
       <div className="flex items-start sm:gap-3">
-        <div className="flex flex-shrink-0 items-center justify-center bg-green-200 h-10 w-10 rounded">
-          <svg
-            className="w-4 h-4 fill-current text-green-700"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M3.293 9.707a1 1 0 010-1.414l6-6a1 1 0 011.414 0l6 6a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L4.707 9.707a1 1 0 01-1.414 0z"
-              clip-rule="evenodd"
-            />
-          </svg>
+        <div className="flex flex-shrink-0 items-center justify-center border h-10 w-10 rounded">
+          <img src={comment.user.picture} alt="" className="rounded" />
         </div>
 
         <div>
@@ -56,7 +45,7 @@ export const Comment: React.FC<CommentType> = (comment) => {
             <p className="mt-2 text-xs font-medium text-gray-500 sm:mt-0">
               Commented by{" "}
               <a href="#" className="underline hover:text-gray-700">
-                {comment.user}
+                {comment.user.name}
               </a>
             </p>
           </div>

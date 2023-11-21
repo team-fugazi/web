@@ -12,7 +12,7 @@ import { ReportListItem } from "@/features/report/components/ReportListItem";
 // icons
 import { ArrowLeftIcon } from "@radix-ui/react-icons";
 import { Comments } from "@/features/comments";
-import { StatCard } from "@/features/report/components/Statcard";
+import { StatCard } from "@/features/report/components/StatCard";
 
 const fetcher = (url: string) =>
   fetch("http://127.0.0.1:8000" + url).then((res) => res.json());

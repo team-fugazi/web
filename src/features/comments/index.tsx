@@ -6,7 +6,8 @@ import { Comment } from "./components/comment";
 
 // interfaces
 import { Category } from "../report/interfaces/Category";
-import { CommentType } from "./interfaces/CommentType";
+// import { CommentType } from "./interfaces/CommentType";
+import { CommentTypeUser } from "./interfaces/CommentType";
 
 interface Props {
   report: Category;
@@ -27,10 +28,10 @@ export const Comments = ({ report }: Props) => {
     });
   };
 
-  const demoComment: CommentType = {
+  const demoComment: CommentTypeUser = {
     comment: "this is a comment",
     date: "20/11-2023",
-    user: user ? user?.name : "Anonymous",
+    user: user!,
   };
 
   return (
