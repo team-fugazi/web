@@ -4,7 +4,7 @@ import { useParams, Link } from "react-router-dom";
 
 // feature components
 import { Layout } from "@/features/layout";
-import { ReportListItem } from "@/features/report/components/ReportListItem";
+import { ReportDetails } from "@/features/report/components/ReportDetails";
 
 // types
 // import { Category } from "@/features/report/interfaces/Category";
@@ -47,7 +47,7 @@ const ReportDetail = () => {
       {/* Page content */}
       <main className="pt-8 grid grid-cols-5 gap-4">
         <section className="flex flex-col space-y-4 col-span-3">
-          <ReportListItem category={data} />
+          <ReportDetails category={data} />
 
           <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-4 w-full max-w-6xl">
             <StatCard title="Average sentence length" value={8430} />

@@ -1,21 +1,20 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
 // components
-// import CategoryChip from "./CategoryChip";
+import CategoryChip from "./CategoryChip";
 
 // utils
 import { formatDate } from "../utils/FormatDate";
 
 // types
-import { Data as ReportData } from "@/features/report/interfaces/Reports";
+import { Category } from "../interfaces/Category";
 
 interface Props {
-  report: ReportData;
+  category: Category;
 }
 
-export const ReportListItem: React.FC<Props> = ({ report }) => {
-  const formattedDate = formatDate(new Date(report.created_at));
+export const ReportDetails: React.FC<Props> = ({ category }) => {
+  const formattedDate = formatDate(new Date());
 
   return (
     <div className="flow-root rounded border border-gray-200 py-3">
@@ -35,7 +34,7 @@ export const ReportListItem: React.FC<Props> = ({ report }) => {
           <dd className="sm:col-span-2">
             <a
               className="text-blue-500"
-              href={report.original_post}
+              href="https://www.reddit.com/r/rust/comments/17xa7mp/anyone_know_of_any_decent_alternatives_to/"
               target="_blank"
               rel="noreferrer"
             >
@@ -47,21 +46,14 @@ export const ReportListItem: React.FC<Props> = ({ report }) => {
         <div className="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
           <dt className="font-medium text-gray-900">Report Category</dt>
           <dd className="text-gray-700 sm:col-span-2">
-            
+            <CategoryChip category={category} />
           </dd>
         </div>
 
         <div className="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
           <dt className="font-medium text-gray-900">Content</dt>
           <dd className="text-gray-700 sm:col-span-2 ">
-            {report.description}
-          </dd>
-        </div>
-
-        <div className="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
-          <dt className="font-medium text-gray-900">See more</dt>
-          <dd className="text-blue-500 sm:col-span-2 ">
-            <Link to={`/reports/${report._id}`}>See more</Link>
+            {category.description} Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsam nulla amet voluptatum sit rerum, atque, quo culpa ut necessitatibus eius suscipit eum accusamus, aperiam voluptas exercitationem facere aliquid fuga. Sint.
           </dd>
         </div>
       </dl>

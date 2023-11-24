@@ -98,6 +98,18 @@ export const Comments: React.FC<Props> = ({ report }) => {
         date={demoComment.date}
         user={demoComment.user}
       />
+
+      <Comment
+        comment={demoComment.comment}
+        date={demoComment.date}
+        user={demoComment.user}
+      />
+
+      <Comment
+        comment={demoComment.comment}
+        date={demoComment.date}
+        user={demoComment.user}
+      />
     </article>
   );
 };

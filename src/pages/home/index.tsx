@@ -12,27 +12,7 @@ const Home = () => {
 
   return (
     <Layout>
-      {isAuthenticated ? (
-        <>
-          <div>
-            <div className="text-left mt-10 ml-5 text-lg font-bold">
-              <div>Welcome to Fugazi, {user?.name}</div>
-            </div>
-            <div className="flex flex-col">
-              <div className="m-5">
-                <InputTextArea />
-              </div>
-              <div>
-                <BigStats />
-              </div>
-            </div>
-          </div>
-        </>
-      ) : (
-        <div>Not logged in</div>
-      )}
-
-      <section className="bg-none text-gray-900">
+      <section className="text-gray-900">
         <div className="max-w-screen-xl px-4 py-8 sm:py-12 sm:px-6 lg:py-16 lg:px-8">
           <div className="max-w-xl">
             <h2 className="text-3xl font-bold sm:text-4xl">
@@ -236,6 +216,27 @@ const Home = () => {
           </div>
         </div>
       </section>
+      
+      {isAuthenticated ? (
+        <>
+          <div>
+            <div className="text-left mt-10 ml-5 text-lg font-bold">
+              <div>Welcome to Fugazi, {user?.name}</div>
+            </div>
+            <div className="flex flex-col">
+              <div className="m-5">
+                <InputTextArea />
+              </div>
+              <div>
+                <BigStats />
+              </div>
+            </div>
+          </div>
+        </>
+      ) : (
+        <div>Not logged in</div>
+      )}
+
     </Layout>
   );
 };
