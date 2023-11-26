@@ -10,11 +10,11 @@ import { formatDate } from "../utils/FormatDate";
 import { Category } from "../interfaces/Category";
 
 interface Props {
-  category: Category;
+  report: any;
 }
 
-export const ReportDetails: React.FC<Props> = ({ category }) => {
-  const formattedDate = formatDate(new Date());
+export const ReportDetails: React.FC<Props> = ({ report }) => {
+  const formattedDate = formatDate(new Date(report.created_at));
 
   return (
     <div className="flow-root rounded border border-gray-200 py-3">
@@ -30,11 +30,11 @@ export const ReportDetails: React.FC<Props> = ({ category }) => {
         </div>
 
         <div className="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
-          <dt className="font-medium text-gray-900">Attachments:</dt>
+          <dt className="font-medium text-gray-900">Link:</dt>
           <dd className="sm:col-span-2">
             <a
               className="text-blue-500"
-              href="https://www.reddit.com/r/rust/comments/17xa7mp/anyone_know_of_any_decent_alternatives_to/"
+              href={report.original_post}
               target="_blank"
               rel="noreferrer"
             >
@@ -46,14 +46,14 @@ export const ReportDetails: React.FC<Props> = ({ category }) => {
         <div className="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
           <dt className="font-medium text-gray-900">Report Category</dt>
           <dd className="text-gray-700 sm:col-span-2">
-            <CategoryChip category={category} />
+            <CategoryChip category={report.category} />
           </dd>
         </div>
 
         <div className="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
           <dt className="font-medium text-gray-900">Content</dt>
           <dd className="text-gray-700 sm:col-span-2 ">
-            {category.description} Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsam nulla amet voluptatum sit rerum, atque, quo culpa ut necessitatibus eius suscipit eum accusamus, aperiam voluptas exercitationem facere aliquid fuga. Sint.
+            {report.description} Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsam nulla amet voluptatum sit rerum, atque, quo culpa ut necessitatibus eius suscipit eum accusamus, aperiam voluptas exercitationem facere aliquid fuga. Sint.
           </dd>
         </div>
       </dl>

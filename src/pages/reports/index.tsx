@@ -81,6 +81,7 @@ const Reports = () => {
           ))}
 
           {results.length === 0 &&
+            reports !== undefined &&
             reports!.data.map((report: ReportData, i: React.Key) => (
               <ReportListItem report={report} key={i} />
             ))}

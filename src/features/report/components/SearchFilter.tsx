@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { useDebounce } from "@uidotdev/usehooks";
 
+const API_URL = import.meta.env.VITE_REPORT_SERVICE;
+
 const searchAPI = async (query: string) => {
-  const response = await fetch(
-    `http://localhost:8000/v1/search/reports?query=${query}`
-  );
+  const response = await fetch(`${API_URL}/search/reports?query=${query}`);
   const data = await response.json();
   return data;
 };
@@ -17,7 +17,7 @@ export const SearchFilter: React.FC<{ handleSearch: (res: []) => void }> = ({
   const debouncedSearchTerm = useDebounce(searchTerm, 500);
 
   // handle search input changes
-  const handleChange = (e) => {
+  const handleChange = (e: any) => {
     setSearchTerm(e.target.value);
   };
 

@@ -2,18 +2,25 @@ import React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { toast } from "react-toastify";
 
+// API URL
+const API_URL = import.meta.env.VITE_REPORT_SERVICE;
+
 // components
 import { Comment } from "./components/comment";
-
 // icons
 import { PaperPlaneIcon } from "@radix-ui/react-icons";
 
 // interfaces
-import { Category } from "../report/interfaces/Category";
-import { CommentTypeUser } from "./interfaces/CommentType";
+// import { Category } from "../report/interfaces/Category";
+// import { CommentTypeUser } from "./interfaces/CommentType";
+import {
+  Comment as CommentType,
+  Data as ReportFull,
+} from "../report/interfaces/ReportFull";
+import { mutate } from "swr";
 
 interface Props {
-  report: Category;
+  report: ReportFull;
 }
 
 export const Comments: React.FC<Props> = ({ report }) => {
@@ -22,18 +29,14 @@ export const Comments: React.FC<Props> = ({ report }) => {
 
   const PostComment = async () => {
     // Send comment to backend
-    const response = await fetch(
-      `http://127.0.0.1:8000/v1/categories/${report.id}`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          comment: comment,
-        }),
-      }
-    );
+    const response = await fetch(`${API_URL}/reports/${report._id}/comment`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        user: user!.sub,
+        content: comment,
+      }),
+    });
 
     // Check if response is ok
     if (!response.ok) {
@@ -43,13 +46,8 @@ export const Comments: React.FC<Props> = ({ report }) => {
 
     // Notify user
     toast.success("Comment posted! 🌟");
+    mutate(`${API_URL}/reports/${report._id}`);
     setComment("");
-  };
-
-  const demoComment: CommentTypeUser = {
-    comment: "this is a comment",
-    date: "20/11-2023",
-    user: user!,
   };
 
   return (
@@ -81,35 +79,9 @@ export const Comments: React.FC<Props> = ({ report }) => {
         </div>
       </label>
 
-      <Comment
-        comment={demoComment.comment}
-        date={demoComment.date}
-        user={demoComment.user}
-      />
-
-      <Comment
-        comment={demoComment.comment}
-        date={demoComment.date}
-        user={demoComment.user}
-      />
-
-      <Comment
-        comment={demoComment.comment}
-        date={demoComment.date}
-        user={demoComment.user}
-      />
-
-      <Comment
-        comment={demoComment.comment}
-        date={demoComment.date}
-        user={demoComment.user}
-      />
-
-      <Comment
-        comment={demoComment.comment}
-        date={demoComment.date}
-        user={demoComment.user}
-      />
+      {report.comments.map((comment: CommentType) => {
+        return <Comment comment={comment} user={user!} />;
+      })}
     </article>
   );
 };

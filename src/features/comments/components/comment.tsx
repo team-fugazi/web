@@ -1,21 +1,30 @@
 import React from "react";
+import { User } from "@auth0/auth0-react";
 
-import { CommentTypeUser } from "../interfaces/CommentType";
+import { Comment as CommentType } from "@/features/report/interfaces/ReportFull";
 
-export const Comment: React.FC<CommentTypeUser> = (comment) => {
+import { formatDate } from "@/features/report/utils/FormatDate";
+
+// interfaces
+interface Props {
+  comment: CommentType;
+  user: User;
+}
+
+
+
+export const Comment: React.FC<Props> = ({ comment, user }) => {
+  const formattedDate = formatDate(new Date(comment.created_at));
   return (
     <article className="rounded border border-gray-200 p-3">
       <div className="flex items-start sm:gap-3">
         <div className="flex flex-shrink-0 items-center justify-center border h-10 w-10 rounded">
-          <img src={comment.user.picture} alt="" className="rounded" />
+          <img src={user.picture} alt="" className="rounded" />
         </div>
 
         <div>
           <p className="text-sm font-light subpixel-antialiased text-gray-700">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsam
-            nulla amet voluptatum sit rerum, atque, quo culpa ut necessitatibus
-            eius suscipit eum accusamus, aperiam voluptas exercitationem facere
-            aliquid fuga. Sint. {comment.comment}
+            {comment.content}
           </p>
 
           <div className="mt-3 sm:flex sm:items-center sm:gap-2">
@@ -35,7 +44,7 @@ export const Comment: React.FC<CommentTypeUser> = (comment) => {
                 ></path>
               </svg>
 
-              <p className="text-xs font-medium">{comment.date}</p>
+              <p className="text-xs font-medium">{formattedDate}</p>
             </div>
 
             <span className="hidden sm:block" aria-hidden="true">
@@ -43,9 +52,8 @@ export const Comment: React.FC<CommentTypeUser> = (comment) => {
             </span>
 
             <p className="mt-2 text-xs font-medium text-gray-500 sm:mt-0">
-              Commented by{" "}
               <a href="#" className="underline hover:text-gray-700">
-                {comment.user.name}
+                {user.name}
               </a>
             </p>
           </div>
