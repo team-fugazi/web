@@ -1,6 +1,7 @@
 import React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { toast } from "react-toastify";
+import { mutate } from "swr";
 
 // API URL
 const API_URL = import.meta.env.VITE_REPORT_SERVICE;
@@ -10,14 +11,10 @@ import { Comment } from "./components/comment";
 // icons
 import { PaperPlaneIcon } from "@radix-ui/react-icons";
 
-// interfaces
-// import { Category } from "../report/interfaces/Category";
-// import { CommentTypeUser } from "./interfaces/CommentType";
 import {
   Comment as CommentType,
   Data as ReportFull,
 } from "../report/interfaces/ReportFull";
-import { mutate } from "swr";
 
 interface Props {
   report: ReportFull;
