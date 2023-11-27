@@ -2,17 +2,21 @@ import React from "react";
 
 // feature components
 import { Layout } from "@/features/layout";
+import Podium from "@/features/podium";
+import { Table } from "@/features/table";
 
 const Community = () => {
   return (
     <Layout>
-      {/* Page header */}
-      <div className="py-8">
-        <h1 className="text-2xl font-semibold text-gray-900">Community</h1>
-      </div>
-
       {/* Page content */}
-      <main className="grid grid-cols-4 gap-4">Community</main>
+      <main className="flex flex-col space-y-8 mt-8">
+        <Podium />
+
+        <div className="flex flex-col">
+          <h1 className="text-xl font-bold mb-6">Top 10 most active users</h1>
+          <Table />
+        </div>
+      </main>
     </Layout>
   );
 };

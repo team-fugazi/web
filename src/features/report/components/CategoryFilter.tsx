@@ -104,8 +104,8 @@ export const CategoryFilter: React.FC<Props> = ({ categories }) => {
             </label>
           </li>
 
-          {categories.map((category: Category) => (
-            <li>
+          {categories.map((category: Category, key: React.Key) => (
+            <li key={key}>
               <label
                 htmlFor="FilterInStock"
                 className="inline-flex items-center gap-2"

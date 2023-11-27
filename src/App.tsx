@@ -12,6 +12,7 @@ const clientId = import.meta.env.VITE_AUTH0_CLIENT_ID;
 import Home from "@/pages/home";
 import Reports from "@/pages/reports";
 import AuthPage from "@/pages/auth";
+import Moderator from "@/pages/moderator";
 
 // Features
 import { ProtectedRoute } from "./features/auth/ProtectedRoute";
@@ -53,6 +54,10 @@ function App() {
         <Route
           path="/community"
           element={<ProtectedRoute component={Community} />}
+        />
+        <Route
+          path="/moderator"
+          element={<ProtectedRoute component={Moderator} />}
         />
         <Route path="/prep" element={<AuthLayoutComponent />} />
       </Routes>

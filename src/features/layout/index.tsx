@@ -7,15 +7,15 @@ import { Navbar } from "./components/Navbar";
 
 // types
 interface Props {
-	children: React.ReactNode | React.ReactNode[];
+  children: React.ReactNode | React.ReactNode[];
 }
 
 export const Layout = ({ children }: Props) => {
-	return (
-		<div className="h-screen">
-			<Navbar />
+  return (
+    <div className="h-screen">
+      <Navbar />
 
-			<section className="flex-1 container mx-auto px-4">{children}</section>
-		</div>
-	);
+      <section className="flex-1 container mx-auto px-4 mb-10">{children}</section>
+    </div>
+  );
 };

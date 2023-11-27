@@ -1,15 +1,18 @@
+import React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 
 // Local Components
-import { LogoutButton } from "@/auth/LogoutButton";
+// import { LogoutButton } from "@/auth/LogoutButton";
 import { LoginButton } from "@/auth/LoginButton";
 import { SignupButton } from "@/auth/SignupButton";
 
 // Feature components
 import { NavItem } from "./NavItem";
+import Avatar from "./Avatar";
 
 export const Navbar = () => {
-  const { isAuthenticated } = useAuth0();
+  const [isModerator] = React.useState(true);
+  const { isAuthenticated, user } = useAuth0();
 
   return (
     <header aria-label="Site Header" className="bg-transparent border-b">
@@ -40,6 +43,7 @@ export const Navbar = () => {
               <NavItem href="/">Home</NavItem>
               <NavItem href="/reports">Reports</NavItem>
               <NavItem href="/community">Community</NavItem>
+              {isModerator && <NavItem href="/moderator">Moderator</NavItem>}
             </ul>
 
             {/** Auth links */}
@@ -50,7 +54,7 @@ export const Navbar = () => {
                   <SignupButton />
                 </>
               ) : (
-                <LogoutButton />
+                <Avatar user={user} />
               )}
             </div>
           </nav>

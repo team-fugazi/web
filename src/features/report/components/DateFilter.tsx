@@ -5,7 +5,7 @@ export const DateFilter = () => {
   const [endDate, setEndDate] = useState<string>();
 
   return (
-    <details className="overflow-hidden rounded border border-gray-200 shadow-sm [&_summary::-webkit-details-marker]:hidden">
+    <details className="overflow-hidden rounded border border-gray-200 shadow-sm [&_summary::-webkit-details-marker]:hidden" open>
       <summary className="flex cursor-pointer items-center justify-between gap-2 bg-white p-4 text-gray-900 transition">
         <span className="text-sm font-medium"> Period </span>
 
