@@ -3,12 +3,24 @@ import React from "react";
 // Components
 import { Pillar } from "./components/Pillar";
 
-const Podium: React.FC = () => {
+// types
+import { Datum as User } from "@/features/table/interfaces/data";
+
+interface Props {
+  users: User[];
+}
+
+const Podium: React.FC<Props> = ({ users }) => {
   // Move data and heightMap outside the component
+
+  // FIXME: this is a hacky way to map the data to the height of the pillars
+  const scoreMapper = (user: User) => {
+    return (user.reports || 0) * 5 + (user.comments || 0);
+  }
   const results = [
-    { name: "Yakup", score: 974, avatarColor: "bg-indigo-500" },
-    { name: "Anders", score: 1308, avatarColor: "bg-indigo-600" },
-    { name: "Frederik", score: 892, avatarColor: "bg-indigo-400" },
+    { name: users[1]._id.slice(-5,-1), score: scoreMapper(users[1]), avatarColor: "bg-indigo-500" },
+    { name: users[0]._id.slice(-5,-1), score: scoreMapper(users[0]), avatarColor: "bg-indigo-600" },
+    { name: users[2]._id.slice(-5,-1), score: scoreMapper(users[2]), avatarColor: "bg-indigo-400" },
   ];
 
   return (

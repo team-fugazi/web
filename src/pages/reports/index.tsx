@@ -7,7 +7,6 @@ import { Layout } from "@/features/layout";
 import { DateFilter } from "@/features/report/components/DateFilter";
 import { ReportListItem } from "@/features/report/components/ReportListItem";
 import { SearchFilter } from "@/features/report/components/SearchFilter";
-// import { SeverityFilter } from "@/features/report/components/SeverityFilter";
 import { CategoryFilter } from "@/features/report/components/CategoryFilter";
 
 // types
@@ -16,7 +15,7 @@ import {
   Data as ReportData,
 } from "@/features/report/interfaces/Reports";
 
-// env
+// environment variables
 const API_URL = import.meta.env.VITE_REPORT_SERVICE;
 
 const fetcher = (url: string) => fetch(API_URL + url).then((res) => res.json());

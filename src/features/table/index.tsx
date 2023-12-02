@@ -1,6 +1,13 @@
 import React from "react";
 
-export const Table: React.FC = () => {
+// types
+import { Datum as User } from "@/features/table/interfaces/data";
+
+interface Props {
+  users: User[];
+}
+
+export const Table: React.FC<Props> = ({ users }) => {
   return (
     <div className="overflow-x-auto rounded-lg border border-gray-200">
       <table className="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
@@ -22,15 +29,15 @@ export const Table: React.FC = () => {
         </thead>
 
         <tbody className="divide-y divide-gray-200">
-          {[...Array(10)].map((_, i) => (
+          {users.map((user: User, i) => (
             <tr key={i}>
               <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-                Frederik Bode
+                {user._id}
               </td>
               <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                1093
+                {user.comments}
               </td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700">354</td>
+              <td className="whitespace-nowrap px-4 py-2 text-gray-700">{user.reports ? user.reports : 0 }</td>
               <td className="whitespace-nowrap px-4 py-2 text-gray-700">24</td>
             </tr>
           ))}

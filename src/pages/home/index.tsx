@@ -10,6 +10,8 @@ import { InputTextArea } from "@/features/detection/components/InputTextArea";
 const Home = () => {
   const { isAuthenticated, user } = useAuth0();
 
+  console.log(user);
+
   return (
     <Layout>
       <section className="text-gray-900">

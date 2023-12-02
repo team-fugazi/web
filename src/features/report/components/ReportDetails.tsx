@@ -1,7 +1,7 @@
 import React from "react";
 
 // components
-// import CategoryChip from "./CategoryChip";
+import CategoryChip from "./CategoryChip";
 
 // utils
 import { formatDate } from "../utils/format-date";
@@ -16,6 +16,8 @@ interface Props {
 
 export const ReportDetails: React.FC<Props> = ({ report }) => {
   const formattedDate = formatDate(new Date(report.created_at));
+
+  console.log(report.category);
 
   return (
     <div className="flow-root rounded border border-gray-200 py-3">
@@ -47,14 +49,14 @@ export const ReportDetails: React.FC<Props> = ({ report }) => {
         <div className="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
           <dt className="font-medium text-gray-900">Report Category</dt>
           <dd className="text-gray-700 sm:col-span-2">
-            {/* <CategoryChip category={report.category} /> */}
+            <CategoryChip category={report.category} />
           </dd>
         </div>
 
         <div className="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
           <dt className="font-medium text-gray-900">Content</dt>
           <dd className="text-gray-700 sm:col-span-2 ">
-            {report.description} Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsam nulla amet voluptatum sit rerum, atque, quo culpa ut necessitatibus eius suscipit eum accusamus, aperiam voluptas exercitationem facere aliquid fuga. Sint.
+            {report.description}
           </dd>
         </div>
       </dl>

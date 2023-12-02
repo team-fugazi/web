@@ -1,13 +1,13 @@
 import React from "react";
+import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
 import { toast } from "react-toastify";
 import { mutate } from "swr";
 
-// API URL
-const API_URL = import.meta.env.VITE_REPORT_SERVICE;
-
 // components
+import * as ScrollArea from "@radix-ui/react-scroll-area";
 import { Comment } from "./components/comment";
+
 // icons
 import { PaperPlaneIcon } from "@radix-ui/react-icons";
 
@@ -16,27 +16,29 @@ import {
   Data as ReportFull,
 } from "../report/interfaces/ReportFull";
 
+// API URL
+const API_URL = import.meta.env.VITE_REPORT_SERVICE;
+
 interface Props {
   report: ReportFull;
 }
 
 export const Comments: React.FC<Props> = ({ report }) => {
-  const [comment, setComment] = React.useState<string>(""); // [
+  const [comment, setComment] = React.useState<string>("");
   const { user } = useAuth0();
 
   const PostComment = async () => {
     // Send comment to backend
-    const response = await fetch(`${API_URL}/reports/${report._id}/comment`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
+    const response = await axios.post(
+      `${API_URL}/reports/${report._id}/comment`,
+      {
         user: user!.sub,
         content: comment,
-      }),
-    });
+      }
+    );
 
     // Check if response is ok
-    if (!response.ok) {
+    if (!(response.status === 200)) {
       toast.error("Something went wrong! 😢");
       return;
     }
@@ -46,6 +48,23 @@ export const Comments: React.FC<Props> = ({ report }) => {
     mutate(`${API_URL}/reports/${report._id}`);
     setComment("");
   };
+
+  // const DeleteComment = async (commentId: string) => {
+  //   // Send comment to backend
+  //   const resp = await axios.delete(
+  //     `${API_URL}/reports/${report._id}/comment/${commentId}`
+  //   );
+
+  //   // Check if response is ok
+  //   if (!(resp.status === 200)) {
+  //     toast.error("Something went wrong! 😢");
+  //     return;
+  //   }
+
+  //   // Notify user
+  //   toast.success("Comment deleted! 🌟");
+  //   mutate(`${API_URL}/reports/${report._id}`);
+  // };
 
   return (
     <article className="space-y-3">
@@ -71,14 +90,35 @@ export const Comments: React.FC<Props> = ({ report }) => {
             className="w-6 h-6 rounded bg-gray-600 hover:bg-gray-400 flex items-center justify-center"
             onClick={PostComment}
           >
-            <PaperPlaneIcon className="inline h-3 w-3 text-white -rotate-45" />
+            <PaperPlaneIcon className="inline h-3 w-3 text-white" />
           </button>
         </div>
       </label>
 
-      {report.comments.map((comment: CommentType) => {
-        return <Comment comment={comment} user={user!} />;
-      })}
+      <ScrollArea.Root className="w-full h-2/3 rounded overflow-hidden  ">
+        <ScrollArea.Viewport className="w-full h-full rounded">
+          <div className="flex flex-col gap-3">
+            {report.comments.map((comment: CommentType) => {
+              return (
+                <Comment key={comment._id} comment={comment} user={user!} />
+              );
+            })}
+          </div>
+        </ScrollArea.Viewport>
+        <ScrollArea.Scrollbar
+          className="flex select-none touch-none p-0.5 bg-blackA3 transition-colors duration-[160ms] ease-out hover:bg-blackA5 data-[orientation=vertical]:w-2.5 data-[orientation=horizontal]:flex-col data-[orientation=horizontal]:h-2.5"
+          orientation="vertical"
+        >
+          <ScrollArea.Thumb className="flex-1 bg-mauve10 rounded-[10px] relative before:content-[''] before:absolute before:top-1/2 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2 before:w-full before:h-full before:min-w-[44px] before:min-h-[44px]" />
+        </ScrollArea.Scrollbar>
+        <ScrollArea.Scrollbar
+          className="flex select-none touch-none p-0.5 bg-blackA3 transition-colors duration-[160ms] ease-out hover:bg-blackA5 data-[orientation=vertical]:w-2.5 data-[orientation=horizontal]:flex-col data-[orientation=horizontal]:h-2.5"
+          orientation="horizontal"
+        >
+          <ScrollArea.Thumb className="flex-1 bg-mauve10 rounded-[10px] relative before:content-[''] before:absolute before:top-1/2 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2 before:w-full before:h-full before:min-w-[44px] before:min-h-[44px]" />
+        </ScrollArea.Scrollbar>
+        <ScrollArea.Corner className="bg-blackA5" />
+      </ScrollArea.Root>
     </article>
   );
 };

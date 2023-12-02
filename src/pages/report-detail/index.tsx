@@ -53,7 +53,7 @@ const ReportDetail = () => {
         <section className="flex flex-col space-y-4 col-span-3">
           <ReportDetails report={report.data} />
 
-          <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-4 w-full max-w-6xl">
+          <div className="grid grid-cols-2 xl:grid-cols-3 gap-4 w-full max-w-6xl">
             <StatCard title="Average sentence length" value={8430} />
             <StatCard title="Named entities" value={-211} />
             <StatCard title="Sentiment analysis" value={79} />
