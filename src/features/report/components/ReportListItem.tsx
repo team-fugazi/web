@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 // import CategoryChip from "./CategoryChip";
 
 // utils
-import { formatDate } from "../utils/FormatDate";
+import { formatDate } from "../utils/format-date";
 
 // types
 import { Data as ReportData } from "@/features/report/interfaces/Reports";

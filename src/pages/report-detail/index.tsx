@@ -14,12 +14,14 @@ import { ArrowLeftIcon } from "@radix-ui/react-icons";
 import { Comments } from "@/features/comments";
 import { StatCard } from "@/features/report/components/StatCard";
 
-const fetcher = (url: string) =>
-  fetch("http://127.0.0.1:8000" + url).then((res) => res.json());
+// env
+const API_URL = import.meta.env.VITE_REPORT_SERVICE;
+
+const fetcher = (url: string) => fetch(API_URL + url).then((res) => res.json());
 
 const ReportDetail = () => {
   const { reportId } = useParams();
-  const { data: report, error } = useSWR(`/v1/reports/${reportId}`, fetcher);
+  const { data: report, error } = useSWR(`/reports/${reportId}`, fetcher);
 
   if (error) return <div>failed to load</div>;
   if (!report) return <div>loading...</div>;

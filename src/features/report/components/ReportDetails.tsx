@@ -1,16 +1,17 @@
 import React from "react";
 
 // components
-import CategoryChip from "./CategoryChip";
+// import CategoryChip from "./CategoryChip";
 
 // utils
-import { formatDate } from "../utils/FormatDate";
+import { formatDate } from "../utils/format-date";
 
 // types
-import { Category } from "../interfaces/Category";
+// import { Category } from "../interfaces/Category";
+import { Data as Report } from "../interfaces/ReportFull";
 
 interface Props {
-  report: any;
+  report: Report;
 }
 
 export const ReportDetails: React.FC<Props> = ({ report }) => {
@@ -46,7 +47,7 @@ export const ReportDetails: React.FC<Props> = ({ report }) => {
         <div className="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
           <dt className="font-medium text-gray-900">Report Category</dt>
           <dd className="text-gray-700 sm:col-span-2">
-            <CategoryChip category={report.category} />
+            {/* <CategoryChip category={report.category} /> */}
           </dd>
         </div>
 

@@ -1,7 +1,9 @@
 import React from "react";
+
+// components
 import { withAuthenticationRequired } from "@auth0/auth0-react";
 
-const AuthLayout = () => {
+const AuthLayout: React.FC = () => {
   return <div>AuthLayout</div>;
 };
 

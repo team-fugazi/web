@@ -3,7 +3,7 @@ import { User } from "@auth0/auth0-react";
 
 import { Comment as CommentType } from "@/features/report/interfaces/ReportFull";
 
-import { formatDate } from "@/features/report/utils/FormatDate";
+import { formatDate } from "@/features/report/utils/format-date";
 
 // interfaces
 interface Props {

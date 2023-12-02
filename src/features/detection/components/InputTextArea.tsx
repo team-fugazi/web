@@ -1,6 +1,6 @@
 import React from "react";
 
-export const InputTextArea = () => {
+export const InputTextArea: React.FC = () => {
 	return (
 		<div>
 			<label htmlFor="OrderNotes" className="sr-only">

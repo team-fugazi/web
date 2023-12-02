@@ -20,6 +20,10 @@ import AuthLayoutComponent from "./features/layout/AuthLayout";
 import Community from "./pages/community";
 import ReportDetail from "./pages/report-detail";
 
+// environment variables
+const AUTH0_REDIRECT = import.meta.env.VITE_AUTH0_REDIRECT;
+const AUTH_AUDIENCE = import.meta.env.VITE_AUTH0_AUDIENCE;
+
 function App() {
   const navigate = useNavigate();
 
@@ -36,8 +40,8 @@ function App() {
       useRefreshTokens={true}
       onRedirectCallback={onRedirectCallback}
       authorizationParams={{
-        redirect_uri: "http://localhost:5173/",
-        audience: "https://dev-r2bppovsrgoxsk4m.us.auth0.com/api/v2/",
+        redirect_uri: AUTH0_REDIRECT,
+        audience: AUTH_AUDIENCE,
       }}
     >
       <Routes>
@@ -60,6 +64,7 @@ function App() {
           element={<ProtectedRoute component={Moderator} />}
         />
         <Route path="/prep" element={<AuthLayoutComponent />} />
+        <Route path="/test" element={<p>Test</p>} />
       </Routes>
 
       {/** React Toast Container */}
