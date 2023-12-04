@@ -1,20 +1,53 @@
 import React from "react";
 import { User } from "@auth0/auth0-react";
 import { twMerge } from "tailwind-merge";
+import { toast } from "react-toastify";
+import { mutate } from "swr";
 
-import { Comment as CommentType } from "@/features/report/interfaces/ReportFull";
+// controller
+import commentController from "../controller/comment";
 
+// utils
 import { formatDate } from "@/features/report/utils/format-date";
 
-// interfaces
+// components
+import { DeleteDialog } from "./delete-dialog";
+
+// types & interfaces
+import {
+  Comment as CommentType,
+  Data as ReportFull,
+} from "@/features/report/interfaces/ReportFull";
+
 interface Props {
   comment: CommentType;
   user: User;
+  report: ReportFull;
 }
 
-export const Comment: React.FC<Props> = ({ comment, user }) => {
+// environment variables
+const API_URL = import.meta.env.VITE_REPORT_SERVICE;
+
+export const Comment: React.FC<Props> = ({ comment, user, report }) => {
   const formattedDate = formatDate(new Date(comment.created_at));
   const isPoster = user.sub === comment.user;
+
+  const onDelete = async () => {
+    const response = await commentController.deleteComment({
+      reportId: report._id,
+      commentId: comment._id,
+    });
+
+    // Check if response is ok
+    if (!(response.status === 200)) {
+      toast.error("Something went wrong! 😢");
+      return;
+    }
+
+    // Notify user
+    toast.success("Comment deleted! 🌟");
+    mutate(`${API_URL}/reports/${report._id}`);
+  };
 
   return (
     <article className={twMerge("rounded border border-gray-200 p-3")}>
@@ -65,11 +98,7 @@ export const Comment: React.FC<Props> = ({ comment, user }) => {
                 <span className="hidden sm:block" aria-hidden="true">
                   &middot;
                 </span>
-                <p className="text-xs font-light text-gray-500">
-                  <a href="#" className="hover:underline hover:text-gray-700">
-                    Delete
-                  </a>
-                </p>
+                <DeleteDialog handler={onDelete} />
               </>
             )}
           </div>

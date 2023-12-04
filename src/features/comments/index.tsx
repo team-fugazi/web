@@ -1,8 +1,13 @@
 import React from "react";
-import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
 import { toast } from "react-toastify";
 import { mutate } from "swr";
+
+// data
+import { commentMessages as messages} from "@/data/messages";
+
+// controller
+import commentController from "./controller/comment";
 
 // components
 import * as ScrollArea from "@radix-ui/react-scroll-area";
@@ -27,44 +32,27 @@ export const Comments: React.FC<Props> = ({ report }) => {
   const [comment, setComment] = React.useState<string>("");
   const { user } = useAuth0();
 
-  const PostComment = async () => {
+  const postComment = async () => {
     // Send comment to backend
-    const response = await axios.post(
-      `${API_URL}/reports/${report._id}/comment`,
-      {
-        user: user!.sub,
-        content: comment,
-      }
-    );
+    const response = await commentController.postComment({
+      id: report._id,
+      user: user!.sub ? user!.sub : "",
+      comment: comment,
+    });
 
     // Check if response is ok
     if (!(response.status === 200)) {
-      toast.error("Something went wrong! 😢");
+      console.log(response);
+      toast.error(messages.error);
       return;
     }
 
     // Notify user
-    toast.success("Comment posted! 🌟");
+    toast.success(messages.success);
     mutate(`${API_URL}/reports/${report._id}`);
     setComment("");
   };
 
-  // const DeleteComment = async (commentId: string) => {
-  //   // Send comment to backend
-  //   const resp = await axios.delete(
-  //     `${API_URL}/reports/${report._id}/comment/${commentId}`
-  //   );
-
-  //   // Check if response is ok
-  //   if (!(resp.status === 200)) {
-  //     toast.error("Something went wrong! 😢");
-  //     return;
-  //   }
-
-  //   // Notify user
-  //   toast.success("Comment deleted! 🌟");
-  //   mutate(`${API_URL}/reports/${report._id}`);
-  // };
 
   return (
     <article className="space-y-3">
@@ -88,7 +76,7 @@ export const Comments: React.FC<Props> = ({ report }) => {
 
           <button
             className="w-6 h-6 rounded bg-gray-600 hover:bg-gray-400 flex items-center justify-center"
-            onClick={PostComment}
+            onClick={postComment}
           >
             <PaperPlaneIcon className="inline h-3 w-3 text-white" />
           </button>
@@ -100,7 +88,12 @@ export const Comments: React.FC<Props> = ({ report }) => {
           <div className="flex flex-col gap-3">
             {report.comments.map((comment: CommentType) => {
               return (
-                <Comment key={comment._id} comment={comment} user={user!} />
+                <Comment
+                  key={comment._id}
+                  report={report}
+                  comment={comment}
+                  user={user!}
+                />
               );
             })}
           </div>

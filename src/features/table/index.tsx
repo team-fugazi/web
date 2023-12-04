@@ -17,13 +17,13 @@ export const Table: React.FC<Props> = ({ users }) => {
               User
             </th>
             <th className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-              # Comments
+              Comments
             </th>
             <th className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-              # Reports
+              Reports
             </th>
             <th className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-              # Moderations
+              Moderations
             </th>
           </tr>
         </thead>

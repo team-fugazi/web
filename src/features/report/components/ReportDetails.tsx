@@ -17,8 +17,6 @@ interface Props {
 export const ReportDetails: React.FC<Props> = ({ report }) => {
   const formattedDate = formatDate(new Date(report.created_at));
 
-  console.log(report.category);
-
   return (
     <div className="flow-root rounded border border-gray-200 py-3">
       <dl className="-my-3 divide-y divide-gray-100 text-sm">

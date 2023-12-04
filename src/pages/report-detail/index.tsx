@@ -26,8 +26,6 @@ const ReportDetail = () => {
   if (error) return <div>failed to load</div>;
   if (!report) return <div>loading...</div>;
 
-  console.log(report.data);
-
   return (
     <Layout>
       {/* Breadcrumb */}
