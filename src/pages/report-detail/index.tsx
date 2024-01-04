@@ -12,7 +12,7 @@ import { ReportDetails } from "@/features/report/components/ReportDetails";
 // icons
 import { ArrowLeftIcon } from "@radix-ui/react-icons";
 import { Comments } from "@/features/comments";
-import { StatCard } from "@/features/report/components/StatCard";
+// import { StatCard } from "@/features/report/components/StatCard";
 
 // env
 const API_URL = import.meta.env.VITE_REPORT_SERVICE;
@@ -51,7 +51,7 @@ const ReportDetail = () => {
         <section className="flex flex-col space-y-4 col-span-3">
           <ReportDetails report={report.data} />
 
-          <div className="grid grid-cols-2 xl:grid-cols-3 gap-4 w-full max-w-6xl">
+          {/* <div className="grid grid-cols-2 xl:grid-cols-3 gap-4 w-full max-w-6xl">
             <StatCard title="Average sentence length" value={8430} />
             <StatCard title="Named entities" value={-211} />
             <StatCard title="Sentiment analysis" value={79} />
@@ -61,7 +61,7 @@ const ReportDetail = () => {
             <StatCard title="Readability (Flesch-Kincaid)" value={-2.5} desc="mol" />
             <StatCard title="Spelling Errors" value={5} />
             <StatCard title="Grammar Errors" value={2} />
-          </div>
+          </div> */}
         </section>
 
         <section className="flex flex-col space-y-4 col-span-2">
